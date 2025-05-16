@@ -1,8 +1,9 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { events } from "@/data/mockData";
+import { getAllEvents, deleteEvent } from "@/services/eventService";
+import { Event } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -27,12 +28,34 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 
 const EventList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("Tous");
+  const [events, setEvents] = useState<Event[]>([]);
+  const [eventToDelete, setEventToDelete] = useState<Event | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
+
+  // Charger les événements
+  useEffect(() => {
+    const loadEvents = () => {
+      const eventsData = getAllEvents();
+      setEvents(eventsData);
+    };
+    loadEvents();
+  }, []);
 
   // Filtrer les événements
   const filteredEvents = events.filter(event => {
@@ -50,13 +73,32 @@ const EventList = () => {
     return new Date(dateString).toLocaleDateString('fr-FR');
   };
 
-  // Simuler la suppression
-  const handleDelete = (eventId: string, eventTitle: string) => {
-    // Ici, nous simulons la suppression puisque nous utilisons des données mockées
-    toast({
-      title: "Événement supprimé",
-      description: `L'événement "${eventTitle}" a bien été supprimé.`,
-    });
+  // Ouvrir la boîte de dialogue de confirmation
+  const confirmDelete = (event: Event) => {
+    setEventToDelete(event);
+    setIsDeleteDialogOpen(true);
+  };
+
+  // Supprimer l'événement
+  const handleDelete = () => {
+    if (eventToDelete) {
+      const success = deleteEvent(eventToDelete.id);
+      if (success) {
+        setEvents(getAllEvents()); // Rafraîchir la liste
+        toast({
+          title: "Événement supprimé",
+          description: `L'événement "${eventToDelete.title}" a bien été supprimé.`,
+        });
+      } else {
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de la suppression.",
+          variant: "destructive",
+        });
+      }
+      setIsDeleteDialogOpen(false);
+      setEventToDelete(null);
+    }
   };
 
   return (
@@ -169,7 +211,7 @@ const EventList = () => {
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             className="text-red-600"
-                            onClick={() => handleDelete(event.id, event.title)}
+                            onClick={() => confirmDelete(event)}
                           >
                             Supprimer
                           </DropdownMenuItem>
@@ -183,6 +225,31 @@ const EventList = () => {
           </Table>
         </div>
       </div>
+
+      {/* Boîte de dialogue de confirmation de suppression */}
+      <AlertDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirmer la suppression</AlertDialogTitle>
+            <AlertDialogDescription>
+              Êtes-vous sûr de vouloir supprimer l'événement "{eventToDelete?.title}" ?
+              Cette action ne peut pas être annulée.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Annuler</AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={handleDelete}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Supprimer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };

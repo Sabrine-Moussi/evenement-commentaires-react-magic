@@ -11,6 +11,8 @@ import EventDetailPage from "@/pages/EventDetailPage";
 import AdminLayout from "@/layouts/AdminLayout";
 import Dashboard from "@/pages/admin/Dashboard";
 import EventList from "@/pages/admin/events/EventList";
+import CreateEvent from "@/pages/admin/events/CreateEvent";
+import EditEvent from "@/pages/admin/events/EditEvent";
 import CommentManagement from "@/pages/admin/comments/CommentManagement";
 import NotFound from "@/pages/NotFound";
 
@@ -37,6 +39,8 @@ const App = () => (
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="events" element={<EventList />} />
+              <Route path="events/create" element={<CreateEvent />} />
+              <Route path="events/:id" element={<EditEvent />} />
               <Route path="comments" element={<CommentManagement />} />
             </Route>
             

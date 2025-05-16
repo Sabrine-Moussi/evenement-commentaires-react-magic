@@ -1,8 +1,7 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,43 +11,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const AdminHeader = () => {
-  const { collapsed } = useSidebar();
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  // Mettre à jour l'heure actuelle toutes les minutes
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
-
-    return () => clearInterval(timer);
-  }, []);
+  const [currentTime] = useState(new Date().toLocaleTimeString('fr-FR'));
 
   const formattedDate = new Intl.DateTimeFormat('fr-FR', {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
     year: 'numeric',
-  }).format(currentTime);
-
-  const formattedTime = currentTime.toLocaleTimeString('fr-FR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  }).format(new Date());
 
   return (
     <div className="border-b bg-background h-16 p-4 flex items-center justify-between">
       <div className="flex items-center">
-        <SidebarTrigger 
-          className={cn(
-            "mr-4",
-            !collapsed && "hidden" // N'afficher le trigger que lorsque la sidebar est réduite
-          )} 
-        />
         <div>
           <div className="text-sm font-medium">Administration</div>
           <div className="text-xs text-muted-foreground">
-            {formattedDate} | {formattedTime}
+            {formattedDate} | {currentTime}
           </div>
         </div>
       </div>
@@ -117,10 +95,5 @@ const AdminHeader = () => {
     </div>
   );
 };
-
-// Utilitaire cn importé depuis utils
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(" ");
-}
 
 export default AdminHeader;
