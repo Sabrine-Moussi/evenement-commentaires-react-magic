@@ -76,9 +76,15 @@ const EventForm = ({ initialData, onSubmit, isSubmitting = false }: EventFormPro
 
   // Gérer la soumission du formulaire
   const handleSubmit = (values: FormData) => {
-    const formattedData = {
-      ...values,
+    // Nous nous assurons ici que toutes les propriétés requises sont présentes
+    const formattedData: Omit<Event, "id"> = {
+      title: values.title,
+      description: values.description,
       date: values.date.toISOString().split("T")[0], // Format: YYYY-MM-DD
+      location: values.location,
+      imageUrl: values.imageUrl,
+      organizer: values.organizer,
+      category: values.category,
     };
 
     try {
@@ -187,7 +193,7 @@ const EventForm = ({ initialData, onSubmit, isSubmitting = false }: EventFormPro
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent className="w-auto p-0 pointer-events-auto" align="start">
                       <CalendarComponent
                         mode="single"
                         selected={field.value}
