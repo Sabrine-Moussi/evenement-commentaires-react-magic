@@ -6,16 +6,9 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
 
 const AdminLayout = () => {
-  // Effet pour le titre de la page et appliquer le thème sombre
+  // Effet pour le titre de la page
   useEffect(() => {
     document.title = "Administration | EventsManager";
-    // Appliquer le thème sombre au layout d'administration
-    document.documentElement.classList.add('dark');
-    
-    // Nettoyer en enlevant la classe quand on quitte le layout admin
-    return () => {
-      document.documentElement.classList.remove('dark');
-    };
   }, []);
 
   return (
@@ -24,11 +17,11 @@ const AdminLayout = () => {
         <title>Administration | EventsManager</title>
       </Helmet>
 
-      <div className="flex min-h-screen w-full bg-[#1A1F2C] text-gray-100">
+      <div className="flex min-h-screen w-full">
         <AdminSidebar />
         <div className="flex flex-col flex-1 overflow-hidden">
           <AdminHeader />
-          <div className="flex-1 overflow-y-auto p-6">
+          <div className="flex-1 overflow-y-auto">
             <Outlet />
           </div>
         </div>

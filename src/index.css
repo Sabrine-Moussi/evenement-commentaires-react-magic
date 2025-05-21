@@ -37,25 +37,25 @@
   }
 
   .dark {
-    --background: 222.2 47.4% 11.2%;
+    --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 47.4% 11.2%;
+    --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 47.4% 11.2%;
+    --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 255 92% 76%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 260 84% 60%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 262 83% 58%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -63,7 +63,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --ring: 262 83% 58%;
   }
 }
 
@@ -103,12 +103,12 @@
 
 /* Styles spécifiques au thème sombre */
 .dark {
-  /* Styles spécifiques pour la sidebar et le dashboard en mode sombre */
-  @apply text-gray-100;
+  /* Styles spécifiques pour la sidebar en mode sombre */
+  @apply bg-[#1A1F2C] text-gray-100;
 }
 
 .dark .border-r {
-  @apply border-blue-900/50;
+  @apply border-gray-700;
 }
 
 .dark .glass-card {
@@ -116,33 +116,5 @@
 }
 
 .dark .dashboard-stat-card {
-  @apply bg-gradient-to-br from-blue-900/40 to-blue-800/30 backdrop-blur-sm border border-blue-900/50;
-}
-
-/* Styles spécifiques pour les graphiques dans le mode sombre */
-.dark .recharts-cartesian-grid-horizontal line,
-.dark .recharts-cartesian-grid-vertical line {
-  @apply stroke-gray-700;
-}
-
-.dark .recharts-text {
-  @apply fill-gray-400;
-}
-
-/* Styles pour les cartes de statistiques */
-.stat-card {
-  @apply rounded-lg p-5 transition-all duration-300 hover:shadow-lg;
-}
-
-.dark .stat-card {
-  @apply bg-blue-900/30 border border-blue-900/60;
-}
-
-/* Styles pour les barres de progression */
-.progress-bar {
-  @apply h-2 rounded-full overflow-hidden bg-gray-200 dark:bg-blue-900/50;
-}
-
-.progress-value {
-  @apply h-full;
+  @apply bg-gradient-to-br from-card to-black/40 backdrop-blur-sm;
 }
