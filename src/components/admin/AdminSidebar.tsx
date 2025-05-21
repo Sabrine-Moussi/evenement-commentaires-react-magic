@@ -23,7 +23,7 @@ const AdminSidebar = () => {
   // Fonction pour déterminer les classes CSS des liens
   const getNavClass = ({ isActive }: { isActive: boolean }) =>
     cn("flex items-center p-2 rounded-md", 
-      isActive ? "bg-muted text-primary font-medium" : "hover:bg-muted/50");
+      isActive ? "bg-blue-900/50 text-white font-medium" : "hover:bg-blue-800/30");
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -31,8 +31,8 @@ const AdminSidebar = () => {
 
   return (
     <div className={cn(
-      "h-screen border-r transition-all duration-300 ease-in-out dark",
-      "bg-background text-foreground",
+      "h-screen border-r border-blue-900/50 transition-all duration-300 ease-in-out",
+      "bg-[#1E2738] text-gray-100",
       isSidebarCollapsed ? "w-16" : "w-64"
     )}>
       {/* Logo */}
@@ -42,7 +42,7 @@ const AdminSidebar = () => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
-            className="w-8 h-8 text-primary"
+            className="w-8 h-8 text-blue-400"
           >
             <path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
             <path
@@ -57,7 +57,7 @@ const AdminSidebar = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6 text-primary"
+              className="w-6 h-6 text-blue-400"
             >
               <path d="M12.75 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM7.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM8.25 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM9.75 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM10.5 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM12.75 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM14.25 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 17.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 15.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5ZM15 12.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM16.5 13.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
               <path
@@ -66,13 +66,13 @@ const AdminSidebar = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="font-bold text-primary">Admin</span>
+            <span className="font-bold text-white">Admin</span>
           </div>
         )}
       </div>
 
       <button 
-        className="absolute top-2 right-2 p-1 rounded hover:bg-muted"
+        className="absolute top-2 right-2 p-1 rounded hover:bg-blue-800/30"
         onClick={toggleSidebar}
       >
         <svg 
@@ -110,8 +110,8 @@ const AdminSidebar = () => {
           <button 
             onClick={() => setEventsOpen(!eventsOpen)}
             className={cn(
-              "flex items-center w-full p-2 rounded-md hover:bg-muted/50",
-              eventsActive && "bg-muted/50"
+              "flex items-center w-full p-2 rounded-md hover:bg-blue-800/30",
+              eventsActive && "bg-blue-900/30"
             )}
           >
             <svg
@@ -175,8 +175,8 @@ const AdminSidebar = () => {
           <button 
             onClick={() => setCommentsOpen(!commentsOpen)}
             className={cn(
-              "flex items-center w-full p-2 rounded-md hover:bg-muted/50",
-              commentsActive && "bg-muted/50"
+              "flex items-center w-full p-2 rounded-md hover:bg-blue-800/30",
+              commentsActive && "bg-blue-900/30"
             )}
           >
             <svg
@@ -253,8 +253,8 @@ const AdminSidebar = () => {
       </div>
 
       {/* Retour au site */}
-      <div className="mt-auto pt-4 border-t px-3">
-        <NavLink to="/" className="flex items-center p-2 rounded-md hover:bg-muted/50">
+      <div className="mt-auto pt-4 border-t border-blue-900/50 px-3">
+        <NavLink to="/" className="flex items-center p-2 rounded-md hover:bg-blue-800/30">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

@@ -41,27 +41,27 @@ const Dashboard = () => {
         <title>Tableau de bord | Administration</title>
       </Helmet>
 
-      <div className="p-6">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Tableau de bord</h1>
-          <p className="text-muted-foreground">Bienvenue dans le panneau d'administration.</p>
+      <div className="p-4">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold mb-2 text-white">Tableau de bord</h1>
+          <p className="text-blue-200/80">Vue d'ensemble des statistiques et activités</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {/* Total d'événements */}
-          <Card>
+          <Card className="dashboard-stat-card border-0 shadow-lg">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-gray-300">
                 Total d'événements
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{totalEvents}</div>
+              <div className="text-3xl font-bold text-white">{totalEvents}</div>
             </CardContent>
             <CardFooter>
               <Link 
                 to="/admin/events"
-                className="text-xs text-primary hover:underline"
+                className="text-xs text-blue-300 hover:text-blue-200 hover:underline"
               >
                 Voir les détails
               </Link>
@@ -69,36 +69,36 @@ const Dashboard = () => {
           </Card>
 
           {/* Événements à venir */}
-          <Card>
+          <Card className="dashboard-stat-card border-0 shadow-lg">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-gray-300">
                 Événements à venir
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{upcomingEvents}</div>
+              <div className="text-3xl font-bold text-white">{upcomingEvents}</div>
             </CardContent>
             <CardFooter>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-gray-400">
                 {upcomingEvents} sur {totalEvents} événements
               </div>
             </CardFooter>
           </Card>
 
           {/* Total de commentaires */}
-          <Card>
+          <Card className="dashboard-stat-card border-0 shadow-lg">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-gray-300">
                 Total de commentaires
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-3xl font-bold">{totalComments}</div>
+              <div className="text-3xl font-bold text-white">{totalComments}</div>
             </CardContent>
             <CardFooter>
               <Link 
                 to="/admin/comments"
-                className="text-xs text-primary hover:underline"
+                className="text-xs text-blue-300 hover:text-blue-200 hover:underline"
               >
                 Voir les détails
               </Link>
@@ -106,22 +106,22 @@ const Dashboard = () => {
           </Card>
 
           {/* Événement récent */}
-          <Card>
+          <Card className="dashboard-stat-card border-0 shadow-lg">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">
+              <CardTitle className="text-sm font-medium text-gray-300">
                 Dernier événement
               </CardTitle>
             </CardHeader>
             <CardContent className="pb-0">
-              <div className="font-bold truncate">{mostRecentEvent?.title}</div>
-              <div className="text-xs text-muted-foreground">
+              <div className="font-bold truncate text-white">{mostRecentEvent?.title}</div>
+              <div className="text-xs text-gray-400">
                 {new Date(mostRecentEvent?.date).toLocaleDateString('fr-FR')}
               </div>
             </CardContent>
             <CardFooter>
               <Link 
                 to={`/events/${mostRecentEvent?.id}`}
-                className="text-xs text-primary hover:underline"
+                className="text-xs text-blue-300 hover:text-blue-200 hover:underline"
               >
                 Voir l'événement
               </Link>
@@ -131,10 +131,10 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Graphique des événements par catégorie */}
-          <Card className="col-span-1">
+          <Card className="col-span-1 dashboard-stat-card border-0 shadow-lg">
             <CardHeader>
-              <CardTitle>Distribution par catégorie</CardTitle>
-              <CardDescription>Nombre d'événements par catégorie</CardDescription>
+              <CardTitle className="text-white">Distribution par catégorie</CardTitle>
+              <CardDescription className="text-gray-400">Nombre d'événements par catégorie</CardDescription>
             </CardHeader>
             <CardContent className="h-80">
               <ResponsiveContainer width="100%" height="100%">
@@ -147,25 +147,25 @@ const Dashboard = () => {
                     bottom: 5,
                   }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="hsl(var(--primary))" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+                  <XAxis dataKey="name" tick={{ fill: '#94a3b8' }} />
+                  <YAxis tick={{ fill: '#94a3b8' }} />
+                  <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '4px', color: 'white' }} />
+                  <Bar dataKey="count" fill="#3b82f6" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
           {/* Actions rapides */}
-          <Card className="col-span-1">
+          <Card className="col-span-1 dashboard-stat-card border-0 shadow-lg">
             <CardHeader>
-              <CardTitle>Actions rapides</CardTitle>
-              <CardDescription>Accès rapide aux fonctionnalités principales</CardDescription>
+              <CardTitle className="text-white">Actions rapides</CardTitle>
+              <CardDescription className="text-gray-400">Accès rapide aux fonctionnalités principales</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Button asChild className="flex items-center">
+                <Button asChild className="flex items-center bg-blue-600 hover:bg-blue-700">
                   <Link to="/admin/events/create">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ const Dashboard = () => {
                     Créer un événement
                   </Link>
                 </Button>
-                <Button variant="outline" asChild>
+                <Button variant="outline" asChild className="border-blue-700 text-blue-300 hover:text-blue-100 hover:bg-blue-900/50">
                   <Link to="/admin/events">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@ const Dashboard = () => {
                     Gérer les événements
                   </Link>
                 </Button>
-                <Button variant="outline" asChild>
+                <Button variant="outline" asChild className="border-blue-700 text-blue-300 hover:text-blue-100 hover:bg-blue-900/50">
                   <Link to="/admin/comments">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +213,7 @@ const Dashboard = () => {
                     Modérer les commentaires
                   </Link>
                 </Button>
-                <Button variant="outline" asChild>
+                <Button variant="outline" asChild className="border-blue-700 text-blue-300 hover:text-blue-100 hover:bg-blue-900/50">
                   <Link to="/admin/settings">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -233,7 +233,7 @@ const Dashboard = () => {
               </div>
             </CardContent>
             <CardFooter>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-gray-400">
                 Dernière mise à jour: {new Date().toLocaleDateString('fr-FR')}
               </div>
             </CardFooter>
