@@ -6,9 +6,16 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHeader from "@/components/admin/AdminHeader";
 
 const AdminLayout = () => {
-  // Effet pour le titre de la page
+  // Effet pour le titre de la page et appliquer le thème sombre
   useEffect(() => {
     document.title = "Administration | EventsManager";
+    // Appliquer le thème sombre au layout d'administration
+    document.documentElement.classList.add('dark');
+    
+    // Nettoyer en enlevant la classe quand on quitte le layout admin
+    return () => {
+      document.documentElement.classList.remove('dark');
+    };
   }, []);
 
   return (

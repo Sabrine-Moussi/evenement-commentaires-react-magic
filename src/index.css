@@ -100,3 +100,12 @@
 .comment-item {
   @apply border-l-4 border-primary pl-4 my-2 py-2;
 }
+
+/* Styles spécifiques au thème sombre */
+.dark .glass-card {
+  @apply bg-black/20 backdrop-blur-lg border border-white/10;
+}
+
+.dark .dashboard-stat-card {
+  @apply bg-gradient-to-br from-card to-black/40 backdrop-blur-sm;
+}
