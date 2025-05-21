@@ -31,7 +31,8 @@ const AdminSidebar = () => {
 
   return (
     <div className={cn(
-      "h-screen border-r transition-all duration-300 ease-in-out",
+      "h-screen border-r transition-all duration-300 ease-in-out dark",
+      "bg-background text-foreground",
       isSidebarCollapsed ? "w-16" : "w-64"
     )}>
       {/* Logo */}

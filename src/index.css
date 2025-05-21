@@ -102,6 +102,15 @@
 }
 
 /* Styles spécifiques au thème sombre */
+.dark {
+  /* Styles spécifiques pour la sidebar en mode sombre */
+  @apply bg-[#1A1F2C] text-gray-100;
+}
+
+.dark .border-r {
+  @apply border-gray-700;
+}
+
 .dark .glass-card {
   @apply bg-black/20 backdrop-blur-lg border border-white/10;
 }
